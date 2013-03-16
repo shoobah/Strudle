@@ -29,3 +29,12 @@ D:\Repos\Strudle\Strudle\bin\System.Web.WebPages.Razor.xml
 D:\Repos\Strudle\Strudle\obj\Debug\Strudle.csprojResolveAssemblyReference.cache
 D:\Repos\Strudle\Strudle\obj\Debug\Strudle.dll
 D:\Repos\Strudle\Strudle\obj\Debug\Strudle.pdb
+D:\Repos\Strudle\Strudle\bin\Microsoft.AspNet.SignalR.Core.dll
+D:\Repos\Strudle\Strudle\bin\Microsoft.AspNet.SignalR.Owin.dll
+D:\Repos\Strudle\Strudle\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+D:\Repos\Strudle\Strudle\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\Repos\Strudle\Strudle\bin\Owin.dll
+D:\Repos\Strudle\Strudle\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\Repos\Strudle\Strudle\bin\Microsoft.AspNet.SignalR.Owin.xml
+D:\Repos\Strudle\Strudle\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+D:\Repos\Strudle\Strudle\bin\Microsoft.Owin.Host.SystemWeb.xml
