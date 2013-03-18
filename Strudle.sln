@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strudle", "Strudle\Strudle.csproj", "{DBD53791-2C52-4002-B37F-EC7846580565}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketExperiment", "..\SocketExperiment\SocketExperiment\SocketExperiment.csproj", "{B20EF4CC-38C8-43C0-B1DB-8FCC2C67E8AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{DBD53791-2C52-4002-B37F-EC7846580565}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBD53791-2C52-4002-B37F-EC7846580565}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBD53791-2C52-4002-B37F-EC7846580565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B20EF4CC-38C8-43C0-B1DB-8FCC2C67E8AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B20EF4CC-38C8-43C0-B1DB-8FCC2C67E8AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B20EF4CC-38C8-43C0-B1DB-8FCC2C67E8AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B20EF4CC-38C8-43C0-B1DB-8FCC2C67E8AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
