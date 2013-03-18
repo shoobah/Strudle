@@ -23,13 +23,7 @@ namespace Strudle
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-            if (Context.Request.Path.Contains("/signalr/negotiate"))
-            {
-                Context.Response.AddHeader("Access-Control-Allow-Origin", "*");
-                Context.Response.AddHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
-                Context.Response.AddHeader("Access-Control-Allow-Methods", "GET, POST");
-                Context.Response.AddHeader("Access-Control-Allow-Credentials", "true");
-            }
+
         }
     }
 }
