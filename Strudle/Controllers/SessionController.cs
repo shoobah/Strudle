@@ -109,7 +109,6 @@ namespace Strudle.Controllers
         public List<User> ConnectedUsers;
     }
     
-
     public class User
     {
         public int Id;

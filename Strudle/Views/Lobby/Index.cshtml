@@ -50,13 +50,20 @@
                     $(item.ConnectedUsers).each(function (i, connectedUser) {
                         connectedUsers = connectedUsers + "<li>"+connectedUser.Id.toString()+"</li>";
                     });
-                    
+
+                    var dataDefinition = "";                    
+                    for (var key in item.DataDefinition) {
+                        if (item.DataDefinition.hasOwnProperty(key)) {
+                            dataDefinition = dataDefinition + "[" + key + " -> " + item.DataDefinition[key] + "] ";
+                        }
+                    }
+
                     $("#Sessions").append("<li class='session' id='" + item.Id + "'>" +
                         "<input type='button' class='joinSession' value='Join Session'>" +
                         "<input type='button' class='createDataDef' value='Create Datadefinition'>" +
                         "<input type='text' class='createDataDefText'>" +
                         "<h2>" +
-                        item.Name +
+                        item.Name + dataDefinition +
                         "</h2><ul>" + connectedUsers + "</ul></li>");
                 });
             }),
@@ -84,9 +91,9 @@
             url: "/api/Session/data/" + session,
             type: "POST",
             contentType: "application/json; charset=UTF8",
-            data: "{'Data':"+ dataValue +"}",
+            data: "{'Data':'"+ dataValue +"'}",
             success: (function (data) {
-                alert("dä funka!");
+                getSessions();
             }),
             error: (function (data) {
             })
