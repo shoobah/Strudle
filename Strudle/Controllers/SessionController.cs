@@ -30,7 +30,7 @@ namespace Strudle.Controllers
         public Guid CreateSession(int id, SessionInformation info)
         {
             if (SessionList == null)
-            {
+            { 
                 SessionList = new List<Session>();
             }
 
@@ -80,12 +80,12 @@ namespace Strudle.Controllers
         [ActionName("Connect")]
         public string ConnectToSession(Guid id, User user)
         {
-            var find = SessionList.Find(session => session.Id == id);
+            var find = SessionList.Find(session => session.Id == id); 
 
-            if (find != null)
+            if (find != null) 
             {
-                find.ConnectedUsers.Add(user);
-                return "SUCCES MFS";
+                find.ConnectedUsers.Add(user); 
+                return "SUCCES MFS"; 
             }
 
             return "FALSE";

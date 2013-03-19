@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Strudle.Controllers
@@ -12,8 +9,11 @@ namespace Strudle.Controllers
         // GET: /Lobby/
 
         public ActionResult Index()
-        {
+        {           
+            //för tillfället simulerar en användare
+            ViewBag.randomUser = new Random(400).Next(); ;
             return View();
+               
         }
 
     }

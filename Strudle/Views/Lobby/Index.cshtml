@@ -3,3 +3,99 @@
 }
 
 <h2>Index</h2>
+
+<h3> your userId: @ViewBag.randomUser </h3>
+
+<script type="text/javascript">
+    $(function () {        
+        getSessions();
+
+        //Skapa data definition för sessionen
+        $("#Sessions").delegate(".createDataDef", "click", function () {
+            createDataDef($(this).parent()[0].id, $(this).next(".createDataDefText").val());
+        });
+
+        //Joina en session
+        $("#Sessions").delegate(".joinSession", "click", function () {
+            joinSession($(this).parent()[0].id, $(this).parent().children("ul"));
+        });
+
+        //skapar en session
+        $("#createSession").click(function () {
+            var text = $("#SessionName").val();            
+            $.ajax({
+                url: "/api/Session/create/@ViewBag.randomUser",
+                type: "POST",
+                contentType: "application/json; charset=UTF8",
+                data: "{'name':'" + text + "'}",
+                success: (function (data) {
+                    getSessions();
+                }),
+                error: (function (data) {
+                })
+            });
+        });
+    });
+    
+    function getSessions() {
+        //hämta alla spelsessioner
+        $.ajax({
+            url: "/api/Session/",
+            type: "GET",
+            contentType: "application/json; charset=UTF8",
+            success: (function (data) {
+                $("#Sessions").html("");
+                $(data).each(function (index, item) {
+                    var connectedUsers="";
+                    $(item.ConnectedUsers).each(function (i, connectedUser) {
+                        connectedUsers = connectedUsers + "<li>"+connectedUser.Id.toString()+"</li>";
+                    });
+                    
+                    $("#Sessions").append("<li class='session' id='" + item.Id + "'>" +
+                        "<input type='button' class='joinSession' value='Join Session'>" +
+                        "<input type='button' class='createDataDef' value='Create Datadefinition'>" +
+                        "<input type='text' class='createDataDefText'>" +
+                        "<h2>" +
+                        item.Name +
+                        "</h2><ul>" + connectedUsers + "</ul></li>");
+                });
+            }),
+            error: (function (data) {
+            })
+        });
+    }
+
+    function joinSession(session, appendTo) {
+        $.ajax({
+            url: "/api/Session/Connect/" + session,
+            type: "POST",
+            contentType: "application/json; charset=UTF8",
+            data: "{'Id':'" + @ViewBag.randomUser + "'}",
+            success: (function (data) {
+                appendTo.append("<li>" + @ViewBag.randomUser +"</li>");
+            }),
+            error: (function(data) {                
+            })
+        });        
+    }
+    
+    function createDataDef(session, dataValue) {
+        $.ajax({
+            url: "/api/Session/data/" + session,
+            type: "POST",
+            contentType: "application/json; charset=UTF8",
+            data: "{'Data':"+ dataValue +"}",
+            success: (function (data) {
+                alert("dä funka!");
+            }),
+            error: (function (data) {
+            })
+        });
+        
+    }
+</script>
+
+<input type="text" id="SessionName"/>
+<input type="button" id="createSession" value="create Session"/>
+
+<ul id="Sessions"></ul>
