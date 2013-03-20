@@ -6,6 +6,8 @@
 
 <h3> your userId: @ViewBag.randomUser </h3>
 
+@Styles.Render("~/Content/css")
+
 <script type="text/javascript">
     $(function () {        
         getSessions();
@@ -18,6 +20,11 @@
         //Joina en session
         $("#Sessions").delegate(".joinSession", "click", function () {
             joinSession($(this).parent()[0].id, $(this).parent().children("ul"));
+        });
+        
+        //Skapa SignalR-session
+        $("#Sessions").delegate(".createSignalR", "click", function () {
+            createSignalR($(this).parent()[0].id);
         });
 
         //skapar en session
@@ -51,20 +58,33 @@
                         connectedUsers = connectedUsers + "<li>"+connectedUser.Id.toString()+"</li>";
                     });
 
-                    var dataDefinition = "";                    
-                    for (var key in item.DataDefinition) {
+                    var dataDefinition = "datadefinition: ";                    
+                    for (var key in item.DataDefinition) {                        
                         if (item.DataDefinition.hasOwnProperty(key)) {
-                            dataDefinition = dataDefinition + "[" + key + " -> " + item.DataDefinition[key] + "] ";
+                            dataDefinition = dataDefinition + key + ":" + item.DataDefinition[key] + " ";
                         }
                     }
-
-                    $("#Sessions").append("<li class='session' id='" + item.Id + "'>" +
+                    
+                    if (item.DataDefinition !== null) {                                                
+                        $("#Sessions").append("<li class='session' id='" + item.Id + "'>" +
                         "<input type='button' class='joinSession' value='Join Session'>" +
                         "<input type='button' class='createDataDef' value='Create Datadefinition'>" +
                         "<input type='text' class='createDataDefText'>" +
                         "<h2>" +
-                        item.Name + dataDefinition +
-                        "</h2><ul>" + connectedUsers + "</ul></li>");
+                        item.Name + " " + dataDefinition +
+                        "</h2><ul>" + connectedUsers + "</ul>" +
+                        "<input type='submit' class='createSignalR' value='create SignalR session'/></li>");
+                    }
+
+                    else{
+                        $("#Sessions").append("<li class='session' id='" + item.Id + "'>" +
+                            "<input type='button' class='joinSession' value='Join Session'>" +
+                            "<input type='button' class='createDataDef' value='Create Datadefinition'>" +
+                            "<input type='text' class='createDataDefText'>" +
+                            "<h2>" +
+                            item.Name +
+                            "</h2><ul>" + connectedUsers + "</ul></li>");
+                    }                    
                 });
             }),
             error: (function (data) {
@@ -97,8 +117,21 @@
             }),
             error: (function (data) {
             })
+        });        
+    }
+    
+    function createSignalR(session) {
+        $.ajax({
+            url: "/api/Session/createSignalR/" + session,
+            type: "POST",
+            contentType: "application/json; charset=UTF8",
+            data: "{'Id':'" + @ViewBag.randomUser + "'}",
+            success: (function (data) {
+                getSessions();
+            }),
+            error: (function (data) {
+            })
         });
-        
     }
 </script>
 

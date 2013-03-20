@@ -37,7 +37,7 @@ namespace Strudle.Controllers
             var session = new Session
                 {
                     Id = Guid.NewGuid(),
-                    State = Session.Status.Init,
+                    State = Session.Status.Created,
                     Name = info.Name,
                     ConnectedUsers = new List<User>() { new User() {Id = id}},
                     DataDefinition = null,
@@ -68,7 +68,7 @@ namespace Strudle.Controllers
                     defaultDataForUsers.Add(parsedDefinition);
                 }
 
-                find.State = Session.Status.Starting;
+                find.State = Session.Status.InitData;
                 find.UserData = defaultDataForUsers;
             }
 
@@ -91,6 +91,21 @@ namespace Strudle.Controllers
             return "FALSE";
         }
 
+        // POST api/Session/createSignalR/id
+        [HttpPost]
+        [ActionName("createSignalR")]
+        public bool HostSignalRHub(Guid id, User user)
+        {
+            var find = SessionList.Find(session => session.Id == id);
+
+            if (find != null)
+            {
+                find.State = Session.Status.HostingSignalR;
+            }
+
+            //TODO: skapa upp en signalR hub, returnera url/sätt/metod för att ansluta till den
+            return true;
+        }
     }
 
     public class SessionInformation
@@ -100,7 +115,7 @@ namespace Strudle.Controllers
 
     public class Session
     {
-        public enum Status { Init, Starting, Started };
+        public enum Status { Created, InitData, HostingSignalR };
         public Guid Id;
         public String Name;
         public Status State;
