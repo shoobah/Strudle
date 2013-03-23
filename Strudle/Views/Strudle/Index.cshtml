@@ -2,24 +2,9 @@
     Layout = "~/Views/Shared/_StrudleBoxLayout.cshtml";
 }
 
-<link href="~/Content/refineslide.css" rel="stylesheet" />    
-<script src="~/Scripts/jquery.refineslide.min.js"></script>
-
-<!--<script>
-    $(document).ready(function () {
-        $('.rs-slider').refineSlide();
-    });
-</script>
-
-    <ul class="rs-slider">
-        <li><img src="~/Content/images/wood6.jpg" /></li>
-        <li><img src="~/Content/images/wood6.jpg" /></li>
-        <li><img src="~/Content/images/wood6.jpg" /></li>
-    </ul>-->
-
-
 <style type="text/css">
     #experiment {
+        margin-top: 10%;
       -webkit-perspective: 800;
       -moz-perspective: 800;
       -webkit-perspective-origin: 50% 200px;
@@ -77,28 +62,40 @@
 </style>
 
 <script type="text/javascript">
-    var xAngle = 0, yAngle = 0;
+    var xAngle = 0, yAngle = 0;    
+    var xOriginal = 0, yOriginal = 0;
+    
     document.addEventListener('keydown', function (e) {
         switch (e.keyCode) {
 
             case 37: // left
-                yAngle -= 90;
+                yAngle -= 90;                
+                break;
+                
+            case 39: // right                
+                yAngle += 90;
                 break;
 
             case 38: // up
                 xAngle += 90;
                 break;
-
-            case 39: // right
-                yAngle += 90;
-                break;
-
+                
             case 40: // down
-                xAngle -= 90;
+                xAngle -= 90;                
                 break;
         };
-        var foo = $('#cube');
-        foo.style.webkitTransform = "rotateX(" + xAngle + "deg) rotateY(" + yAngle + "deg)";
+               
+        if(yOriginal !== yAngle){
+            $('#cube').css('-webkit-transform', 'rotateY(' + yAngle + 'deg)');
+            $('#cube').css('-moz-transform', 'rotateY(' + yAngle + 'deg)');
+            yOriginal = yAngle;
+        }        
+        else if(xOriginal !== xAngle){
+            $('#cube').css('-webkit-transform', 'rotateX(' + xAngle + 'deg)');
+            $('#cube').css('-moz-transform', 'rotateX(' + xAngle + 'deg)');
+            xOriginal = xAngle;
+        }
+        
     }, false);
     
 </script>
